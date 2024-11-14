@@ -1,6 +1,11 @@
 <?php 
 require "../includes/cabecalho-admin.php";
+require "../includes/funcoes-usuarios.php";
+
+$listaDeUsuarios = listarUsuarios($conexao);
 ?>
+
+
 
 
 <div class="row">
@@ -29,11 +34,11 @@ require "../includes/cabecalho-admin.php";
 				</thead>
 
 				<tbody>
-
+	<?php foreach($listaDeUsuarios as $usuarios) { ?>
 					<tr>
-						<td> Nome... </td>
-						<td> E-mail... </td>
-						<td> Tipo... </td>
+						<td> <?=$usuarios['nome']?> </td>
+						<td> <?=$usuarios['email']?> </td>
+						<td> <?=$usuarios['tipo']?></td>
 						<td class="text-center">
 							<a class="btn btn-warning" 
 							href="usuario-atualiza.php">
@@ -46,7 +51,7 @@ require "../includes/cabecalho-admin.php";
 							</a>
 						</td>
 					</tr>
-
+<?php } ?>
 				</tbody>                
 			</table>
 	</div>
