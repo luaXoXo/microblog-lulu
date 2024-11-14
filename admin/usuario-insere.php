@@ -1,5 +1,20 @@
 <?php 
 require "../includes/cabecalho-admin.php";
+require "../includes/funcoes-usuarios.php";
+
+if(isset($_POST['inserir'])){
+	// capturar os dados digitados
+	$nome = $_POST['nome'];
+	$email = $_POST['email'];
+	$tipo = $_POST['tipo'];
+
+	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+
+	inserirUsuario($conexao, $nome, $email, $senha, $tipo);
+
+
+	header("location:usuarios.php");
+}
 ?>
 
 
