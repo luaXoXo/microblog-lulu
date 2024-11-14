@@ -1,4 +1,5 @@
 <?php 
+$titulo = "";
 require "includes/cabecalho.php"; 
 ?>  
 
