@@ -1,5 +1,11 @@
 <?php
+require "../includes/funcoes-de-controle-de-acesso.php";
+verificaAcesso();
+verificarNivel();
+
 require "../includes/funcoes-usuarios.php";
+
+
 
 // Pegando o id passado via URL
 $id = $_GET['id'];

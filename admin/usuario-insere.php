@@ -1,6 +1,7 @@
 <?php 
 require "../includes/cabecalho-admin.php";
 require "../includes/funcoes-usuarios.php";
+verificarNivel();
 
 if(isset($_POST['inserir'])){
 	// capturar os dados digitados

@@ -1,5 +1,32 @@
 <?php
+require "includes/funcoes-de-controle-de-acesso.php";
+require "includes/funcoes-usuarios.php";
 require "includes/cabecalho.php"; 
+
+if(isset($_POST['entrar'])){
+	if(empty($_POST['email']) || empty($_POST['senha'])){
+		header("location:login.php?campos_obrigatorios");
+		die();
+	}
+
+	$email = $_POST['email'];
+	$senha = $_POST['senha'];
+
+	$usuario = buscarUsuario($conexao, $email);
+
+
+	if( $usuario !== null && password_verify($senha, $usuario['senha'])){
+		login($usuario['id'], $usuario['nome'], $usuario['tipo']);
+		header("location:admin/index.php");
+		die();
+
+	}else {
+		header("location:login.php?dados_incorretos");
+		die();
+
+	}
+}
+
 ?>
 
 <div class="row">
