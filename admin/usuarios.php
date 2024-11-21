@@ -2,11 +2,10 @@
 require "../includes/cabecalho-admin.php";
 require "../includes/funcoes-usuarios.php";
 
+/* Chamamos a função listarUsuarios e RECEBEMOS
+o array que ela gerou, guardando na variável $listaDeUsuarios. */
 $listaDeUsuarios = listarUsuarios($conexao);
 ?>
-
-
-
 
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
@@ -34,24 +33,25 @@ $listaDeUsuarios = listarUsuarios($conexao);
 				</thead>
 
 				<tbody>
-	<?php foreach($listaDeUsuarios as $usuarios) { ?>
+<?php foreach( $listaDeUsuarios as $usuario ) { ?>
 					<tr>
-						<td> <?=$usuarios['nome']?> </td>
-						<td> <?=$usuarios['email']?> </td>
-						<td> <?=$usuarios['tipo']?></td>
+						<td> <?=$usuario['nome']?> </td>
+						<td> <?=$usuario['email']?> </td>
+						<td> <?=$usuario['tipo']?> </td>
 						<td class="text-center">
 							<a class="btn btn-warning" 
-							href="usuario-atualiza.php">
+							href="usuario-atualiza.php?id=<?=$usuario['id']?>">
 							<i class="bi bi-pencil"></i> Atualizar
 							</a>
 						
 							<a class="btn btn-danger excluir" 
-							href="usuario-exclui.php">
+							href="usuario-exclui.php?id=<?=$usuario['id']?>">
 							<i class="bi bi-trash"></i> Excluir
 							</a>
 						</td>
 					</tr>
-<?php } ?>
+<?php } ?>		
+
 				</tbody>                
 			</table>
 	</div>
