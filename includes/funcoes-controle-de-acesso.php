@@ -15,7 +15,7 @@ if( !isset($_SESSION)){
 
 
 
-function verificaAcesso(){
+function verificarAcesso(){
     if( !isset($_SESSION['id'])){
         session_destroy();
         header("location:../login.php?acesso_negado");

@@ -1,5 +1,5 @@
 <?php
-require "includes/funcoes-de-controle-de-acesso.php";
+require "includes/funcoes-controle-de-acesso.php";
 require "includes/funcoes-usuarios.php";
 require "includes/cabecalho.php"; 
 
