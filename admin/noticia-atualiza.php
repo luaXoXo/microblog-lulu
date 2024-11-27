@@ -1,6 +1,43 @@
 <?php
 require "../includes/cabecalho-admin.php";
+require "../includes/funcoes-noticias.php";
+
+
+$idNoticia = $_GET['id'];
+
+$idUsuario = $_SESSION['id'];
+
+$tipoUsuario = $_SESSION['tipo'];
+
+$dadosDaNoticia = lerUmaNoticia(
+    $conexao, $idNoticia, $idUsuario, $tipoUsuario
+);
+
+if (isset($_POST['atualizar'])){
+    $titulo = $_POST['titulo'];
+    $texto = $_POST['texto'];
+    $resuno = $_POST['resumo'];
+
+    
+
+    if(empty($_FILES['imagem']['name'])){
+
+        $imagem = $_POST['imagem-existente'];
+
+    } else {
+        $imagem = $_FILES['imagem']['name'];
+
+        upload($_FILES['imagem']);
+    }
+
+    atualizarNoticia(
+        $conexao, $titulo, $texto, $resuno, $imagem, $idNoticia, $idUsuario, $tipoUsuario
+    );
+
+    header("location:noticias.php");
+}
 ?>
+
 
 
 <div class="row">
@@ -14,24 +51,24 @@ require "../includes/cabecalho-admin.php";
 
             <div class="mb-3">
                 <label class="form-label" for="titulo">Título:</label>
-                <input class="form-control" required type="text" id="titulo" name="titulo">
+                <input class="form-control" value="<?=$dadosDaNoticia['titulo']?>" required type="text" id="titulo" name="titulo">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="texto">Texto:</label>
-                <textarea class="form-control" required name="texto" id="texto" cols="50" rows="6"></textarea>
+                <textarea class="form-control" required name="texto" id="texto" cols="50" rows="6"><?=$dadosDaNoticia['texto']?></textarea>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="resumo">Resumo (máximo de 300 caracteres):</label>
                 <span id="maximo" class="badge bg-danger">0</span>
-                <textarea class="form-control" required name="resumo" id="resumo" cols="50" rows="2" maxlength="300"></textarea>
+                <textarea class="form-control" required name="resumo" id="resumo" cols="50" rows="2" maxlength="300"><?=$dadosDaNoticia['resumo']?></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="imagem-existente" class="form-label">Imagem da notícia:</label>
                 <!-- campo somente leitura, meramente informativo -->
-                <input class="form-control" type="text" id="imagem-existente" name="imagem-existente" readonly>
+                <input value="<?=$dadosDaNoticia['imagem']?>" class="form-control" type="text" id="imagem-existente" name="imagem-existente" readonly>
             </div>
 
             <div class="mb-3">

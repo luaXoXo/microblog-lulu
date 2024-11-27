@@ -13,7 +13,7 @@ $listaDeUsuarios = listarUsuarios($conexao);
 		
 		<h2 class="text-center">
 		Usuários <span class="badge bg-dark">
-		<?=count($listaDeNoticias)?>
+		 <?=count($listaDeUsuarios)?>
 		</span>
 		</h2>
 
